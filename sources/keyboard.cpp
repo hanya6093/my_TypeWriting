@@ -19,7 +19,7 @@
 #include <QTime>
 #include <QtGlobal>
 
-
+// 参数列表初始化
 KeyBoard::KeyBoard(QWidget *parent) :
     QMainWindow(parent),
     cur_charactors(0),
@@ -42,25 +42,21 @@ KeyBoard::KeyBoard(QWidget *parent) :
     is_warning(false),
     ui(new Ui::KeyBoard)
 {
-#if 0
 
-#endif
     ui->setupUi(this);
-    //需要打开文件计算当前总字符量
+    //需要打开文件初始化当前总字符量
     total_charactors = 100;
     this->setWindowTitle("打字界面");
     //定时器初始化
-    timer=new QTimer(this);
-    connect(timer,SIGNAL(timeout()),this,SLOT(timerHandleSlot()));
+    timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(timerHandleSlot()));
     //设置窗口格式
     this->setWindowFlags(windowFlags()& ~Qt::WindowMaximizeButtonHint);//添加最大化按钮
     this->setFixedSize(this->width(), this->height());
 
-#if 0
-
-#endif
     //设置view1为焦点
     ui->view1->setFocus();
+    // 在 ui->view1 上安装了当前类作为事件过滤器,这样当前类将能够截获发送到 ui->view1 的所有事件,并进行处理
     ui->view1->installEventFilter(this);
 }
 

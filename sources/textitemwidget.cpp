@@ -11,6 +11,7 @@ TextItemWidget::TextItemWidget(QString text, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::TextItemWidget)
 {
+    // setupUi Qt 的用户界面设计器生成的函数，用于设置用户界面的布局和组件。
     ui->setupUi(this);
     ui->label->setText(text);
 }
@@ -33,7 +34,7 @@ void TextItemWidget::on_pushButton_clicked()
     }
     tl->key_widget = new KeyBoard(tl);
     tl->key_widget->show();
-    tl->key_widget->init_text(tl->exe_path + "/files/text_file/" + ui->label->text() ,ui->label->text());
+    tl->key_widget->init_text(tl->exe_path + "/files/text_file/" + ui->label->text(), ui->label->text());
     //QString str = ui->label->text();
     //qDebug()<<str<<" "<<"路径的字符个数："<<str.size();
     tl->hide();         //隐藏文件选择初始界面

@@ -64,7 +64,7 @@ private:
     QString file_name;
 public:
     bool is_warning;        //表示是否正在警告
-    void init_text(QString textpath ,QString text_name);       /*初始化文本*/
+    void init_text(QString textpath ,QString text_name);       // 初始化文本
     void get_new_line();
     void update_grade(Recordkeeping &re);  //更新分数
     QString random_string();               //随机练习 生成字符串
