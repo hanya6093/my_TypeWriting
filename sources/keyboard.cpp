@@ -297,28 +297,14 @@ void KeyBoard::set_btn_color(QPushButton* button, int choice) {
 void KeyBoard::init_text(QString textpath ,QString text_name)
 {
     file_name = text_name.section(".",0,0);     //获取text文件名称
-    #if 1
     //判断打字文件是否为中文
     is_chinese = file_name.contains(QRegExp("[\\x4e00-\\x9fa5]+"));     //使用正则表达式 含中文符号返回true
     if(file_name == "英文随机打字练习"){
         is_randomfile = true;
         is_chinese = false;
     }
-    #endif
-#if 0
-    int nCount = file_name.count();
-    for(int i = 0 ; i < nCount ; i++)
-    {
-        QChar cha = file_name.at(i);
-        ushort uni = cha.unicode();
-        if(uni >= 0x4E00 && uni <= 0x9FA5)
-        {
-            is_chinese = true;
-            break;
-        }
-    }
-#endif
     //qDebug()<<"这个字符是中文吗"<<" "<<is_chinese;
+
     //获取文件
     if(is_randomfile){
         get_new_line();
@@ -345,24 +331,24 @@ void KeyBoard::get_new_line()
     cur_handled_pos = -1;   //cur_handled_pos:当前处理过的位置 未处理任何一个字符，所以取-1
     static int random_num = 0;
     //判断打开文件的类型：中文/英文
-    if(is_chinese){
+    if (is_chinese) {
         cur_show_str = stream->readLine(LINE_NUMBER2);  //从文件流中一次获取的中文个数
         //限制英文输入模式
         ui->view1->setAttribute(Qt::WA_InputMethodEnabled, true);
         QRegExp rx("^[\u4e00-\u9fa5，。、《》？！；‘：“、|{}]+$");
         QRegExpValidator *latitude = new QRegExpValidator(rx, this);
         ui->view1->setValidator(latitude);
-    }else{
-        if(is_randomfile){
+    } else {
+        if (is_randomfile) {
             cur_show_str = this->random_string();
-            //限制中文输入模式
+            //限制中文输入模式：在 ui->view1 上设置了输入验证,要求其输入必须匹配给定的正则表达式 rx
             ui->view1->setAttribute(Qt::WA_InputMethodEnabled, false);      //默认关闭中文输入模式
             QRegExp rx("^[A-Za-z0-9`~!@#$%^&*()_ -+=<>,.?\\|:;'{}/]+$");    //配置正则表达式
             QRegExpValidator *latitude = new QRegExpValidator(rx, this);    //检测输入内容，仅可显示正则表达式中存在的符号
             ui->view1->setValidator(latitude);
             random_num++;
-            qDebug()<<"次数为："<<random_num;
-        }else{
+            qDebug() << "次数为：" << random_num;
+        } else {
             cur_show_str = file->read(LINE_NUMBER1);     //读取文件的一行内容
             //限制中文输入模式
             ui->view1->setAttribute(Qt::WA_InputMethodEnabled, false);      //默认关闭中文输入模式
@@ -408,7 +394,7 @@ void KeyBoard::get_new_line()
     //亮出第一个按钮
     QPushButton* btn = get_button(cur_show_str[0].toLower().toLatin1());    //tolower()返回字符串的小写 tolatin1转换QString为QByteArray
     if (btn) {
-        greens.push_back(btn);
+        greens.push_back(btn); // 加入绿色列表尾部
         set_btn_color(btn, 1);
     } 
 }
