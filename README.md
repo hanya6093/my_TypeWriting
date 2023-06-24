@@ -1,6 +1,6 @@
 # 整体运行路径
 
-<img src="F:\2、项目资料与论文\3-打字程序软著\my_TypeWriting\README.assets\my_TypeWriting流程图.png" alt="my_TypeWriting流程图" style="zoom: 67%;" />
+<img src=".\README.assets\my_TypeWriting流程图.png" alt="my_TypeWriting流程图" style="zoom: 67%;" />
 
 关键点：keyborad中对字符的处理，按键颜色和字符格式的处理以及更新文件的处理
 
