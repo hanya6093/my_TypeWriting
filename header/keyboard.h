@@ -47,8 +47,8 @@ private:
 
     /*============================按钮变色相关========================================*/
     /*变色按钮*/
-    QVector<QPushButton*> red_btns;
-    QVector<QPushButton*> greens;   //绿色的按钮
+    QVector<QPushButton*> red_btns; // 红色的按钮
+    QVector<QPushButton*> greens;   // 绿色的按钮
 
     /*核心：设置字符背景*/
     void set_char_background(unsigned int pos, QString color, int n);  //设置字符背景颜色
